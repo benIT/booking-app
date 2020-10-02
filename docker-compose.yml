@@ -1,0 +1,29 @@
+version: "3"
+services:
+  db:
+    image: mariadb
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+    volumes:
+      - ./mysql-data:/var/lib/mysql
+    ports:
+    - 3306:3306
+  web:
+    image: benit/buster-php-7.3
+    environment:
+      - TZ=Europe/Paris
+      - http_proxy
+      - https_proxy
+      - HTTP_PROXY
+      - HTTPS_PROXY
+      - no_proxy
+    working_dir: /var/www/app
+    ports:
+      - 8080:80
+    links:
+      - db:database
+    depends_on:
+      - db
+    volumes:
+      - ./app:/var/www/app/
+      - ./apache2/000-default.conf:/etc/apache2/sites-enabled/000-default.conf

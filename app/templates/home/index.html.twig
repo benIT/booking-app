@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {#        <h1 class="mt-5">Booking app! </h1>#}
+
+    <h1>10 Latest Services</h1>
+    <p class="lead">Select from table above a service to book!</p>
+    <table class="table">
+        <th>name</th>
+        <th>date</th>
+        <th>booking</th>
+        {% for service in services %}
+            <tr>
+                <td>{{ service.name }}</td>
+                <td>{{ service.date|date('d-m-y') }}</td>
+                <td><a href="{{ path('service_show',{'id':service.id}) }}">Book a slot</td>
+            </tr>
+        {% endfor %}
+    </table>
+    </div>
+{% endblock %}
+
