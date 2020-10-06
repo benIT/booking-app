@@ -42,30 +42,6 @@ class BookingController extends AbstractController
     }
 
     /**
-     * @Route("/new", name="booking_new", methods={"GET","POST"})
-     */
-    public function new(Request $request): Response
-    {
-        $booking = new Booking();
-        $booking->setDate(new \DateTime());
-        $form = $this->createForm(BookingType::class, $booking);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($booking);
-            $entityManager->flush();
-
-            return $this->redirectToRoute('booking_index');
-        }
-
-        return $this->render('booking/new.html.twig', [
-            'booking' => $booking,
-            'form' => $form->createView(),
-        ]);
-    }
-
-    /**
      * @Route("/{id}", name="booking_show", methods={"GET"})
      */
     public function show(Booking $booking): Response
@@ -86,7 +62,7 @@ class BookingController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('booking_index');
+            return $this->redirectToRoute('booking_my');
         }
 
         return $this->render('booking/edit.html.twig', [
@@ -106,7 +82,7 @@ class BookingController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('booking_index');
+        return $this->redirectToRoute('booking_my');
     }
 
     /**

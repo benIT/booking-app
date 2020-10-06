@@ -307,6 +307,9 @@
             "config/packages/test/monolog.yaml"
         ]
     },
+    "symfony/options-resolver": {
+        "version": "v5.1.5"
+    },
     "symfony/orm-pack": {
         "version": "v2.0.0"
     },

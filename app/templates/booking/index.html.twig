@@ -19,6 +19,7 @@
             <tr>
                 <td>{{ booking.id }}</td>
                 <td>{{ booking.date ? booking.date|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ booking.slot.time|date('H:m') }}</td>
                 <td>{{ booking.quantity }}</td>
                 <td>
                     <a href="{{ path('booking_show', {'id': booking.id}) }}">show</a>
@@ -33,5 +34,5 @@
         </tbody>
     </table>
 
-    <a href="{{ path('booking_new') }}">Create new</a>
+    {#<a href="{{ path('booking_new') }}">Create new</a>#}
 {% endblock %}

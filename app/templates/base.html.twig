@@ -9,11 +9,16 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="/assets/css/sticky-footer-navbar.css">
+
+    <!-- Include Bootstrap Datepicker -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/css/bootstrap-datepicker.min.css" />
+
     {% block stylesheets %}
     {% endblock %}
     <title>booking app</title>
 </head>
 <body>
+
 
 <header>
     <!-- Fixed navbar -->
@@ -54,7 +59,13 @@
 
 <!-- Begin page content -->
 <main role="main" class="container">
-
+    {% for label, messages in app.flashes %}
+        {% for message in messages %}
+            <div class="alert alert-{{ label }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endfor %}
     {% block body %}
     {% endblock %}
 </main>
@@ -74,39 +85,10 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/js/bootstrap-datepicker.min.js"></script>
+
 {% block javascripts %}
 {% endblock %}
 </body>
 </html>
-
-
-{#<!DOCTYPE html>#}
-{#<html>#}
-{#<head>#}
-{#        <meta charset="UTF-8">#}
-{#        <title>{% block title %}Welcome!{% endblock %}</title>#}
-{#        {% block stylesheets %}#}
-{#                <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Spartan&display=swap">#}
-{#                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />#}
-{#                {{ encore_entry_link_tags('app') }}#}
-{#        {% endblock %}#}
-{#</head>#}
-{#<body>#}
-{#<nav class="navbar navbar-light bg-light" style="height: 100px;">#}
-{#        <a class="navbar-brand" href="{{ path('app_home') }}">#}
-{#                <i style="color: #444; font-size: 2rem;" class="pb-1 fad fa-cauldron"></i>#}
-{#                <p class="pl-2 d-inline font-weight-bold" style="color: #444;">NewsLetter manager</p>#}
-{#        </a>#}
-{#        <a href="{{ path('app_login') }}" class="btn btn-dark">Login</a>#}
-{#</nav>#}
-
-{#{% block body %}{% endblock %}#}
-{#<footer class="mt-5 p-3 text-center">#}
-{#        Made with <i style="color: red;" class="fa fa-heart"></i> by ben masson</a>#}
-{#</footer>#}
-{#{% block javascripts %}#}
-{#        {{ encore_entry_script_tags('app') }}#}
-
-{#{% endblock %}#}
-{#</body>#}
-{#</html>#}

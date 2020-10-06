@@ -55,7 +55,7 @@ class ServiceController extends AbstractController
                 ->setService($service)
                 ->setTime((new \DateTime())->setTime(15, 00, 00)));
             $entityManager->flush();
-
+            $this->addFlash('success','done.');
             return $this->redirectToRoute('service_index');
         }
 

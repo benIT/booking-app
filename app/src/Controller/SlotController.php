@@ -98,6 +98,10 @@ class SlotController extends AbstractController
         ]);
 
         $booking = $booking ?: new Booking();
+        if($booking->getIsCanceled()){
+            $this->addFlash('danger','you have already canceled a booking for this slot. bye.');
+            return $this->redirectToRoute('booking_my');
+        }
         $booking
             ->setUser($user)
             ->setDate(new \DateTime())
@@ -112,7 +116,7 @@ class SlotController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($booking);
             $entityManager->flush();
-
+            $this->addFlash('success','done.');
             return $this->redirectToRoute('booking_my');
         }
 
