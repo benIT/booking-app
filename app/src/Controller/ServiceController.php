@@ -55,7 +55,7 @@ class ServiceController extends AbstractController
                 ->setService($service)
                 ->setTime((new \DateTime())->setTime(15, 00, 00)));
             $entityManager->flush();
-            $this->addFlash('success','done.');
+            $this->addFlash('success', 'done.');
             return $this->redirectToRoute('service_index');
         }
 
@@ -74,6 +74,21 @@ class ServiceController extends AbstractController
             'service' => $service,
         ]);
     }
+
+    /**
+     * @Route("/date/{bookingDate}", name="service_date", methods={"GET"})
+     * example: http://localhost:8080/service/date/2020-10-06
+     */
+    public function showByDate(\DateTime $bookingDate, ServiceRepository $serviceRepository): Response
+    {
+
+        $services = $serviceRepository->findBy(['date' => $bookingDate]);
+
+        return $this->render('service/index.html.twig', [
+            'services' => $services,
+        ]);
+    }
+
 
     /**
      * @Route("/{id}/edit", name="service_edit", methods={"GET","POST"})
