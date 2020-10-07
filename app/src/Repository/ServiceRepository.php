@@ -19,6 +19,15 @@ class ServiceRepository extends ServiceEntityRepository
         parent::__construct($registry, Service::class);
     }
 
+
+    public function findFromDate(\DateTime $date)
+    {
+        return $this->createQueryBuilder('s')
+            ->andWhere('s.date >= :date')
+            ->setParameter('date', $date)
+            ->getQuery()
+            ->getResult();
+    }
     // /**
     //  * @return Service[] Returns an array of Service objects
     //  */

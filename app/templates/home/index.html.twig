@@ -13,18 +13,39 @@
             <tr>
                 <td>{{ service.name }}</td>
                 <td>{{ service.date|date('d-m-y') }}</td>
-                <td><a href="{{ path('service_show',{'id':service.id}) }}">Book a slot</td>
+                <td style="display: none" class="service-date">{{ service.date|date('yy-m-d') }}</td>
+                {#<td><a href="{{ path('service_show',{'id':service.id}) }}">Book a slot</td>#}
+                <td>
+                    {% for slot in service.slots %}
+                        <a class="btn btn-info"
+                           href="{{ path('slot_book',{id:slot.id}) }}">{{ slot.time|date('H:i') }}</a>
+                    {% endfor %}
+
+                </td>
             </tr>
         {% endfor %}
     </table>
     </div>
     <p class="lead">or use the datepicker</p>
-    <input class="datepicker" data-date-format="mm/dd/yyyy">
+
+    <br><br><br> <br><br><br> <br><br><br> <br><br><br>
+    <div>
+        <input class="datepicker" data-date-format="mm/dd/yyyy">
+    </div>
+
+
+    <div  id='calendar'></div>
 
 {% endblock %}
 
 {% block javascripts %}
-    <script src="/assets/js/home.js">
+    <script src="/assets/js/home.js"></script>
+
+
+    <script>
+
+
+
 
     </script>
 {% endblock %}
